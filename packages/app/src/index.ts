@@ -1,4 +1,8 @@
+import { Configuration, TransactionRoutesApi } from "symbol-rest";
 import symbolSdk from "symbol-sdk";
+
+const config = new Configuration();
+const transactionHttpRepo = new TransactionRoutesApi(config);
 
 const facade = new symbolSdk.facade.SymbolFacade("testnet");
 const transaction = facade.transactionFactory.create({
@@ -11,4 +15,26 @@ const transaction = facade.transactionFactory.create({
   mosaics: [{ mosaicId: 0x7cdf3b117a3c40ccn, amount: 1000000n }],
 });
 
-console.log(transaction);
+const privateKey = new symbolSdk.PrivateKey(
+  "EDB671EB741BD676969D8A035271D1EE5E75DF33278083D877F23615EB839FEC"
+);
+
+// type error
+const signature = facade.signTransaction(
+  new facade.constructor.KeyPair(privateKey),
+  transaction
+);
+
+// type error
+const jsonPayload = facade.transactionFactory.constructor.attachSignature(
+  transaction,
+  signature
+);
+
+transactionHttpRepo
+  .announceTransaction({
+    transactionPayload: jsonPayload,
+  })
+  .then((e) => {
+    console.log(e);
+  });
