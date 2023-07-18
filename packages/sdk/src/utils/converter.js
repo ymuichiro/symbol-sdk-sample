@@ -56,7 +56,7 @@ export const toByte = (char1, char2) => {
 /**
  * Determines whether or not a string is a hex string.
  * @param {string} input String to test.
- * @returns {boolean} true if the input is a hex string, false otherwise.
+ * @returns {boolean} \c true if the input is a hex string, \c false otherwise.
  */
 export const isHexString = input => {
 	if (0 !== input.length % 2)
@@ -72,8 +72,8 @@ export const isHexString = input => {
 
 /**
  * Converts a hex string to a uint8 array.
- * @param {string} input A hex encoded string.
- * @returns {Uint8Array} A uint8 array corresponding to the input.
+ * @param {string} input Hex encoded string.
+ * @returns {Uint8Array} Uint8 array corresponding to the input.
  */
 export const hexToUint8 = input => {
 	if (0 !== input.length % 2)
@@ -88,8 +88,8 @@ export const hexToUint8 = input => {
 
 /**
  * Converts a uint8 array to a hex string.
- * @param {Uint8Array} input A uint8 array.
- * @returns {string} A hex encoded string corresponding to the input.
+ * @param {Uint8Array} input Uint8 array.
+ * @returns {string} Hex encoded string corresponding to the input.
  */
 export const uint8ToHex = input => {
 	let s = '';
@@ -129,9 +129,9 @@ export const tryParseUint = str => {
 
 /**
  * Converts aligned bytes to little-endian number.
- * @param {Uint8Array} input A uint8 array.
+ * @param {Uint8Array} input Uint8 array.
  * @param {number} size Number of bytes.
- * @param {boolean} isSigned Should number be treated as signed.
+ * @param {boolean} isSigned \c true if number should be treated as signed.
  * @returns {number|BigInt} Value corresponding to the input.
  */
 export const bytesToInt = (input, size, isSigned = false) => {
@@ -141,9 +141,9 @@ export const bytesToInt = (input, size, isSigned = false) => {
 
 /**
  * Converts bytes to little-endian number.
- * @param {Uint8Array} input A uint8 array.
+ * @param {Uint8Array} input Uint8 array.
  * @param {number} size Number of bytes.
- * @param {boolean} isSigned Should number be treated as signed.
+ * @param {boolean} isSigned \c true if number should be treated as signed.
  * @returns {number|BigInt} Value corresponding to the input.
  */
 export const bytesToIntUnaligned = (input, size, isSigned = false) => {

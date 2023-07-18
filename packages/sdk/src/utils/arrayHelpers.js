@@ -1,4 +1,7 @@
 import BufferView from './BufferView.js';
+/* eslint-disable no-unused-vars */
+import Writer from './Writer.js';
+/* eslint-enable no-unused-vars */
 
 /**
  * Deeply compares two array elements.
@@ -74,7 +77,7 @@ export const alignUp = (size, alignment) => Math.floor((size + alignment - 1) / 
  * Calculates size of variable size objects.
  * @param {Array<object>} elements Serializable elements.
  * @param {number} alignment Alignment used for calculations.
- * @param {boolean} skipLastElementPadding true if last element should not be aligned.
+ * @param {boolean} skipLastElementPadding \c true if last element should not be aligned.
  * @returns {number} Computed size.
  */
 export const size = (elements, alignment = 0, skipLastElementPadding = undefined) => {
@@ -89,8 +92,8 @@ export const size = (elements, alignment = 0, skipLastElementPadding = undefined
 
 /**
  * Reads array of objects.
- * @param {Uint8Array} bufferInput Input buffer.
- * @param {type} FactoryClass Factory used to deserialize objects.
+ * @param {Uint8Array} bufferInput Buffer input.
+ * @param {function} FactoryClass Factory used to deserialize objects.
  * @param {function} accessor Optional accessor used to check objects order.
  * @returns {Array<object>} Array of deserialized objects.
  */
@@ -101,8 +104,8 @@ export const readArray = (bufferInput, FactoryClass, accessor = null) =>
 
 /**
  * Reads array of deterministic number of objects.
- * @param {Uint8Array} bufferInput A uint8 array.
- * @param {type} FactoryClass Factory used to deserialize objects.
+ * @param {Uint8Array} bufferInput Buffer input.
+ * @param {function} FactoryClass Factory used to deserialize objects.
  * @param {number} count Number of object to deserialize.
  * @param {function} accessor Optional accessor used to check objects order.
  * @returns {Array<object>} Array of deserialized objects.
@@ -112,10 +115,10 @@ export const readArrayCount = (bufferInput, FactoryClass, count, accessor = null
 
 /**
  * Reads array of variable size objects.
- * @param {Uint8Array} bufferInput A uint8 array.
- * @param {type} FactoryClass Factory used to deserialize objects.
+ * @param {Uint8Array} bufferInput Buffer input.
+ * @param {function} FactoryClass Factory used to deserialize objects.
  * @param {number} alignment Alignment used to make sure each object is at boundary.
- * @param {boolean} skipLastElementPadding true if last element is not aligned/padded.
+ * @param {boolean} skipLastElementPadding \c true if last element is not aligned/padded.
  * @returns {Array<object>} Array of deserialized objects.
  */
 export const readVariableSizeElements = (bufferInput, FactoryClass, alignment, skipLastElementPadding = false) => {
@@ -143,7 +146,7 @@ export const readVariableSizeElements = (bufferInput, FactoryClass, alignment, s
 
 /**
  * Writes array of objects.
- * @param {Writer} output An output sink.
+ * @param {Writer} output Output sink.
  * @param {Array<object>} elements Serializable elements.
  * @param {function} accessor Optional accessor used to check objects order.
  */
@@ -153,7 +156,7 @@ export const writeArray = (output, elements, accessor = undefined) => {
 
 /**
  * Writes array of deterministic number of objects.
- * @param {Writer} output An output sink.
+ * @param {Writer} output Output sink.
  * @param {Array<object>} elements Serializable elements.
  * @param {number} count Number of objects to write.
  * @param {function} accessor Optional accessor used to check objects order.
@@ -162,10 +165,10 @@ export const writeArrayCount = writeArrayImpl;
 
 /**
  * Writes array of variable size objects.
- * @param {Writer} output An output sink.
+ * @param {Writer} output Output sink.
  * @param {Array<object>} elements Serializable elements.
  * @param {number} alignment Alignment used to make sure each object is at boundary.
- * @param {boolean} skipLastElementPadding true if last element should not be aligned/padded.
+ * @param {boolean} skipLastElementPadding \c true if last element should not be aligned/padded.
  */
 export const writeVariableSizeElements = (output, elements, alignment, skipLastElementPadding = false) => {
 	elements.forEach((element, index) => {

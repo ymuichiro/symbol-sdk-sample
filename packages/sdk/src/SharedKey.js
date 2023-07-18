@@ -1,6 +1,11 @@
 // this file contains implementation details and is not intended to be used directly
 
-import { SharedKey256 } from './CryptoTypes.js';
+import {
+	/* eslint-disable no-unused-vars */
+	PublicKey,
+	/* eslint-enable no-unused-vars */
+	SharedKey256
+} from './CryptoTypes.js';
 import { hkdf } from '@noble/hashes/hkdf';
 import { sha256 } from '@noble/hashes/sha256';
 import tweetnacl from 'tweetnacl';

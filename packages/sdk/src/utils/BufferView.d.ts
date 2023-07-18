@@ -3,10 +3,14 @@
  */
 export default class BufferView {
     /**
-     * Creates buffer view around buffer.
+     * Creates buffer view around a buffer.
      * @param {Uint8Array} buffer Initial buffer view.
      */
     constructor(buffer: Uint8Array);
+    /**
+     * Underlying buffer view.
+     * @type Uint8Array
+     */
     buffer: Uint8Array;
     /**
      * Moves view right.

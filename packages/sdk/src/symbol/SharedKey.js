@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import { KeyPair } from './KeyPair.js';
 import { PublicKey, SharedKey256 } from '../CryptoTypes.js';
 /* eslint-enable no-unused-vars */
 import { deriveSharedKeyFactory } from '../SharedKey.js';

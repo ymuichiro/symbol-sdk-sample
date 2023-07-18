@@ -15,5 +15,7 @@ cd ..
 npm run bundle
 
 # build TS bindings
-npx tsc ./src/index.js --allowJS --declaration  --emitDeclarationOnly
-npx tsc ./src/index.d.ts
+npx tsc src/**/*.js --allowJS --declaration  --emitDeclarationOnly
+npx tsc test/**/*.js --allowJS --declaration  --emitDeclarationOnly
+npx tsc vectors/**/*.js --allowJS --declaration  --emitDeclarationOnly
+npx tsc

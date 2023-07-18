@@ -9,19 +9,19 @@ export default class SymbolFacade {
     static BIP32_CURVE_NAME: string;
     /**
      * Network address class type.
-     * @type {function}
+     * @type {typeof Address}
      */
-    static Address: Function;
+    static Address: typeof Address;
     /**
      * Network key pair class type.
-     * @type {function}
+     * @type {typeof KeyPair}
      */
-    static KeyPair: Function;
+    static KeyPair: typeof KeyPair;
     /**
      * Network verifier class type.
-     * @type {function}
+     * @type {typeof Verifier}
      */
-    static Verifier: Function;
+    static Verifier: typeof Verifier;
     /**
      * Derives shared key from key pair and other party's public key.
      * @param {KeyPair} keyPair Key pair.
@@ -99,6 +99,8 @@ import * as sc from '../symbol/models.js';
 import { Hash256 } from '../CryptoTypes.js';
 import { KeyPair } from '../symbol/KeyPair.js';
 import { Signature } from '../CryptoTypes.js';
+import { Address } from '../symbol/Network.js';
+import { Verifier } from '../symbol/KeyPair.js';
 import { PublicKey } from '../CryptoTypes.js';
 import { SharedKey256 } from '../CryptoTypes.js';
 import { Bip32Node } from '../Bip32.js';

@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+import { PublicKey, SharedKey256 } from './CryptoTypes.js';
+/* eslint-enable no-unused-vars */
 import crypto from 'crypto';
 
 const concatArrays = (lhs, rhs) => {
@@ -15,7 +18,7 @@ const concatArrays = (lhs, rhs) => {
 export class AesCbcCipher {
 	/**
 	 * Creates a cipher around an aes shared key.
-	 * @param {SharedKey} aesKey AES shared key.
+	 * @param {SharedKey256} aesKey AES shared key.
 	 */
 	constructor(aesKey) {
 		/**
@@ -71,7 +74,7 @@ export class AesGcmCipher {
 
 	/**
 	 * Creates a cipher around an aes shared key.
-	 * @param {SharedKey} aesKey AES shared key.
+	 * @param {SharedKey256} aesKey AES shared key.
 	 */
 	constructor(aesKey) {
 		/**

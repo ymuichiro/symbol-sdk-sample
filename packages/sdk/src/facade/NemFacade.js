@@ -32,19 +32,19 @@ export default class NemFacade {
 
 	/**
 	 * Network address class type.
-	 * @type {function}
+	 * @type {typeof Address}
 	 */
 	static Address = Address;
 
 	/**
 	 * Network key pair class type.
-	 * @type {function}
+	 * @type {typeof KeyPair}
 	 */
 	static KeyPair = KeyPair;
 
 	/**
 	 * Network verifier class type.
-	 * @type {function}
+	 * @type {typeof Verifier}
 	 */
 	static Verifier = Verifier;
 

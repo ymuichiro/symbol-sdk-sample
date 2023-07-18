@@ -7,11 +7,19 @@ export default class Writer {
      * @param {number} size Allocated buffer size.
      */
     constructor(size: number);
+    /**
+     *  Underlying storage.
+     * @type Uint8Array
+     */
     storage: Uint8Array;
+    /**
+     * Current offset.
+     * @type number
+     */
     offset: number;
     /**
      * Writes array into buffer.
-     * @param {Array<byte>} buffer Data to write.
+     * @param {Array<number>} buffer Data to write.
      */
-    write(buffer: Array<byte>): void;
+    write(buffer: Array<number>): void;
 }

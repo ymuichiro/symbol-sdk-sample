@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+import { KeyPair } from './KeyPair.js';
+/* eslint-enable no-unused-vars */
 import {
 	/* eslint-disable no-unused-vars */
 	PublicKey,

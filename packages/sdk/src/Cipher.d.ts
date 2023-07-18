@@ -4,9 +4,9 @@
 export class AesCbcCipher {
     /**
      * Creates a cipher around an aes shared key.
-     * @param {SharedKey} aesKey AES shared key.
+     * @param {SharedKey256} aesKey AES shared key.
      */
-    constructor(aesKey: SharedKey);
+    constructor(aesKey: SharedKey256);
     /**
      * @private
      */
@@ -37,9 +37,9 @@ export class AesGcmCipher {
     static TAG_SIZE: number;
     /**
      * Creates a cipher around an aes shared key.
-     * @param {SharedKey} aesKey AES shared key.
+     * @param {SharedKey256} aesKey AES shared key.
      */
-    constructor(aesKey: SharedKey);
+    constructor(aesKey: SharedKey256);
     /**
      * @private
      */
@@ -59,3 +59,4 @@ export class AesGcmCipher {
      */
     decrypt(cipherText: Uint8Array, iv: Uint8Array): Uint8Array;
 }
+import { SharedKey256 } from './CryptoTypes.js';
