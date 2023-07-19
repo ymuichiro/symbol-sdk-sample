@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 1.0.4
+  version: 1.0.3
   title: Catapult REST Endpoints
   description: OpenAPI Specification of catapult-rest
   license:
@@ -1455,8 +1455,8 @@ externalDocs:
   description: Symbol Technical Documentation
   url: 'https://docs.symbolplatform.com/'
 servers:
-  - url: 'http://localhost:3000'
-    description: Local development
+  - url: 'https://symbolnode.blockchain-authn.app:3001/'
+    description: MAINNET
 components:
   parameters:
     address:
@@ -3470,8 +3470,8 @@ components:
           type: string
     EmbeddedTransactionBodyDTO:
       type: object
-      required:
-        - transactions
+      # required:
+      #   - transactions
       properties:
         transactions:
           type: array
@@ -3759,7 +3759,7 @@ components:
       type: object
       required:
         - transactionsHash
-        - cosignatures
+        # - cosignatures
       properties:
         transactionsHash:
           $ref: '#/components/schemas/Hash256'
@@ -5151,8 +5151,8 @@ components:
       type: object
       required:
         - restrictionFlags
-        - restrictionAdditions
-        - restrictionDeletions
+        # - restrictionAdditions
+        # - restrictionDeletions
       properties:
         restrictionFlags:
           $ref: '#/components/schemas/AccountRestrictionFlagsEnum'
@@ -5176,8 +5176,8 @@ components:
       type: object
       required:
         - restrictionFlags
-        - restrictionAdditions
-        - restrictionDeletions
+        # - restrictionAdditions
+        # - restrictionDeletions
       properties:
         restrictionFlags:
           $ref: '#/components/schemas/AccountRestrictionFlagsEnum'
@@ -5201,8 +5201,8 @@ components:
       type: object
       required:
         - restrictionFlags
-        - restrictionAdditions
-        - restrictionDeletions
+        # - restrictionAdditions
+        # - restrictionDeletions
       properties:
         restrictionFlags:
           $ref: '#/components/schemas/AccountRestrictionFlagsEnum'
