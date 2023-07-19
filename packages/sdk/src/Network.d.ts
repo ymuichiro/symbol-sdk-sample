@@ -82,9 +82,28 @@ export class Network<Address, NetworkTimestamp> {
      */
     toString(): string;
 }
-export namespace NetworkLocator {
-    function findByName<Address, NetworkTimestamp>(networks: Network<Address, NetworkTimestamp>[], singleOrMultipleNames: string | string[]): Network<Address, NetworkTimestamp>;
-    function findByIdentifier<Address, NetworkTimestamp>(networks: Network<Address, NetworkTimestamp>[], singleOrMultipleIdentifiers: number | number[]): Network<Address, NetworkTimestamp>;
+/**
+ * Provides utility functions for finding a network.
+ */
+export class NetworkLocator {
+    /**
+     * Finds a network with a specified name within a list of networks.
+     * @template Address
+     * @template NetworkTimestamp
+     * @param {Array<Network<Address, NetworkTimestamp>>} networks List of networks to search.
+     * @param {Array<string>|string} singleOrMultipleNames Names for which to search.
+     * @returns {Network<Address, NetworkTimestamp>} First network with a name in the supplied list.
+     */
+    static findByName<Address, NetworkTimestamp>(networks: Network<Address, NetworkTimestamp>[], singleOrMultipleNames: Array<string> | string): Network<Address, NetworkTimestamp>;
+    /**
+     * Finds a network with a specified identifier within a list of networks.
+     * @template Address
+     * @template NetworkTimestamp
+     * @param {Array<Network<Address, NetworkTimestamp>>} networks List of networks to search.
+     * @param {Array<number>|number} singleOrMultipleIdentifiers Identifiers for which to search.
+     * @returns {Network<Address, NetworkTimestamp>} First network with an identifier in the supplied list.
+     */
+    static findByIdentifier<Address_1, NetworkTimestamp_1>(networks: Network<Address_1, NetworkTimestamp_1>[], singleOrMultipleIdentifiers: Array<number> | number): Network<Address_1, NetworkTimestamp_1>;
 }
 import { NetworkTimestampDatetimeConverter } from './NetworkTimestamp.js';
 import { PublicKey } from './CryptoTypes.js';

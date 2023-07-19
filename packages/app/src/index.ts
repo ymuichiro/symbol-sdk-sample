@@ -1,12 +1,6 @@
-import { Configuration, TransactionRoutesApi } from "symbol-rest";
-import * as symbolSdk from "symbol-sdk";
-import type { PrivateKey, Signature } from "symbol-sdk/src/CryptoTypes.js";
+import symbolSdk from "symbol-sdk";
 
-const config = new Configuration();
-const transactionHttpRepo = new TransactionRoutesApi(config);
-
-const facade = new symbolSdk.SymbolFacade("testnet");
-
+const facade = new symbolSdk.facade.SymbolFacade("testnet");
 const transaction = facade.transactionFactory.create({
   type: "transfer_transaction_v1",
   signerPublicKey:
@@ -17,32 +11,23 @@ const transaction = facade.transactionFactory.create({
   mosaics: [{ mosaicId: 0x7cdf3b117a3c40ccn, amount: 1000000n }],
 });
 
-const privateKey: PrivateKey = new symbolSdk.CryptoTypes.PrivateKey(
+type PrivateKey = InstanceType<typeof symbolSdk.PrivateKey>;
+const privateKey: PrivateKey = new symbolSdk.PrivateKey(
   "EDB671EB741BD676969D8A035271D1EE5E75DF33278083D877F23615EB839FEC"
 );
 
+type Signature = InstanceType<typeof symbolSdk.Signature>;
 const signature: Signature = facade.signTransaction(
-  new symbolSdk.SymbolKeyPair.KeyPair(privateKey),
+  new symbolSdk.symbol.KeyPair(privateKey),
   transaction
 );
 
-// type error
-// const jsonPayload = facade.transactionFactory.constructor.attachSignature(
-//   transaction,
-//   signature
-// );
+console.log(privateKey.toString());
+console.log(signature.toString());
 
-// type ok
-const jsonPayload: string =
-  symbolSdk.SymbolTransactionFactory.default.attachSignature(
-    transaction,
-    signature
-  );
+const jsonPayload: string = symbolSdk.symbol.TransactionFactory.attachSignature(
+  transaction,
+  signature
+);
 
-transactionHttpRepo
-  .announceTransaction({
-    transactionPayload: JSON.parse(jsonPayload),
-  })
-  .then((e) => {
-    console.log(e);
-  });
+console.log(jsonPayload);

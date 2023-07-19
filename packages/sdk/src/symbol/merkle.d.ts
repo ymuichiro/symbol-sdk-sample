@@ -31,8 +31,6 @@ export class MerkleHashBuilder {
      */
     final(): Hash256;
 }
-export function proveMerkle(leafHash: Hash256, merklePath: Array<MerklePart>, rootHash: Hash256): boolean;
-export function deserializePatriciaTreeNodes(buffer: Uint8Array): Array<TreeNode>;
 /**
  * Possible results of a patricia merkle proof.
  */
@@ -78,7 +76,6 @@ export class PatriciaMerkleProofResult {
      */
     static PATH_MISMATCH: number;
 }
-export function provePatriciaMerkle(encodedKey: Hash256, valueToTest: Hash256, merklePath: Array<TreeNode>, stateHash: Hash256, subcacheMerkleRoots: Hash256): number;
 /**
  * Path in a Patricia merkle treee.
  */
@@ -106,6 +103,30 @@ export type MerklePart = {
     isLeft: boolean;
 };
 import { Hash256 } from '../CryptoTypes.js';
+/**
+ * Proves a merkle hash.
+ * @param {Hash256} leafHash Leaf hash to prove.
+ * @param {Array<MerklePart>} merklePath Merkle *hash chain* path from leaf to root.
+ * @param {Hash256} rootHash Root hash of the merkle tree.
+ * @returns {boolean} \c true if leaf hash is connected to root hash; false otherwise.
+ */
+export function proveMerkle(leafHash: Hash256, merklePath: Array<MerklePart>, rootHash: Hash256): boolean;
+/**
+ * Deserializes a buffer containing patricia tree nodes.
+ * @param {Uint8Array} buffer Buffer containing serialized patricia tree nodes.
+ * @returns {Array<TreeNode>} Deserialized patricia tree nodes.
+ */
+export function deserializePatriciaTreeNodes(buffer: Uint8Array): Array<TreeNode>;
+/**
+ * Proves a patricia merkle hash.
+ * @param {Hash256} encodedKey Encoded key of the state to prove.
+ * @param {Hash256} valueToTest Expected hash of the state to prove.
+ * @param {Array<TreeNode>} merklePath Merkle *node* path from root to leaf. Each element is BranchNode or LeafNode.
+ * @param {Hash256} stateHash State hash from a block header.
+ * @param {Hash256} subcacheMerkleRoots Sub cache merkle roots corresponding to the state hash.
+ * @returns {number} Proof result code.
+ */
+export function provePatriciaMerkle(encodedKey: Hash256, valueToTest: Hash256, merklePath: Array<TreeNode>, stateHash: Hash256, subcacheMerkleRoots: Hash256): number;
 /**
  *  Node in a compact Patricia tree.
  */

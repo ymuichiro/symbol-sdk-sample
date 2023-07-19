@@ -9,7 +9,7 @@ import Writer from './Writer.js';
  * @param {object} rhs Right object to compare.
  * @returns {number} 1 if lhs is greater than rhs; -1 if lhs is less than rhs; 0 if lhs and rhs are equal.
  */
-export const deepCompare = (lhs, rhs) => {
+const deepCompare = (lhs, rhs) => {
 	if (!Array.isArray(lhs) && !(lhs instanceof Object.getPrototypeOf(Uint8Array))) {
 		if (lhs === rhs)
 			return 0;
@@ -71,7 +71,7 @@ const sum = numbers => numbers.reduce((a, b) => a + b, 0);
  * @param {number} alignment Alignment.
  * @returns {number} Size rounded up to alignment.
  */
-export const alignUp = (size, alignment) => Math.floor((size + alignment - 1) / alignment) * alignment;
+const alignUp = (size, alignment) => Math.floor((size + alignment - 1) / alignment) * alignment;
 
 /**
  * Calculates size of variable size objects.
@@ -80,7 +80,7 @@ export const alignUp = (size, alignment) => Math.floor((size + alignment - 1) / 
  * @param {boolean} skipLastElementPadding \c true if last element should not be aligned.
  * @returns {number} Computed size.
  */
-export const size = (elements, alignment = 0, skipLastElementPadding = undefined) => {
+const size = (elements, alignment = 0, skipLastElementPadding = undefined) => {
 	if (!alignment)
 		return sum(elements.map(e => e.size));
 
@@ -97,7 +97,7 @@ export const size = (elements, alignment = 0, skipLastElementPadding = undefined
  * @param {function} accessor Optional accessor used to check objects order.
  * @returns {Array<object>} Array of deserialized objects.
  */
-export const readArray = (bufferInput, FactoryClass, accessor = null) =>
+const readArray = (bufferInput, FactoryClass, accessor = null) =>
 	// note: this method is used only for '__FILL__' type arrays
 	// this loop assumes properly sliced buffer is passed and that there's no additional data.
 	readArrayImpl(bufferInput, FactoryClass, accessor, (_, view) => 0 < view.buffer.length);
@@ -110,7 +110,7 @@ export const readArray = (bufferInput, FactoryClass, accessor = null) =>
  * @param {function} accessor Optional accessor used to check objects order.
  * @returns {Array<object>} Array of deserialized objects.
  */
-export const readArrayCount = (bufferInput, FactoryClass, count, accessor = null) =>
+const readArrayCount = (bufferInput, FactoryClass, count, accessor = null) =>
 	readArrayImpl(bufferInput, FactoryClass, accessor, index => count > index);
 
 /**
@@ -121,7 +121,7 @@ export const readArrayCount = (bufferInput, FactoryClass, count, accessor = null
  * @param {boolean} skipLastElementPadding \c true if last element is not aligned/padded.
  * @returns {Array<object>} Array of deserialized objects.
  */
-export const readVariableSizeElements = (bufferInput, FactoryClass, alignment, skipLastElementPadding = false) => {
+const readVariableSizeElements = (bufferInput, FactoryClass, alignment, skipLastElementPadding = false) => {
 	const view = new BufferView(bufferInput);
 	const elements = [];
 	while (0 < view.buffer.length) {
@@ -150,7 +150,7 @@ export const readVariableSizeElements = (bufferInput, FactoryClass, alignment, s
  * @param {Array<object>} elements Serializable elements.
  * @param {function} accessor Optional accessor used to check objects order.
  */
-export const writeArray = (output, elements, accessor = undefined) => {
+const writeArray = (output, elements, accessor = undefined) => {
 	writeArrayImpl(output, elements, elements.length, accessor);
 };
 
@@ -161,7 +161,9 @@ export const writeArray = (output, elements, accessor = undefined) => {
  * @param {number} count Number of objects to write.
  * @param {function} accessor Optional accessor used to check objects order.
  */
-export const writeArrayCount = writeArrayImpl;
+const writeArrayCount = (output, elements, count, accessor = null) => {
+	writeArrayImpl(output, elements, count, accessor);
+};
 
 /**
  * Writes array of variable size objects.
@@ -170,7 +172,7 @@ export const writeArrayCount = writeArrayImpl;
  * @param {number} alignment Alignment used to make sure each object is at boundary.
  * @param {boolean} skipLastElementPadding \c true if last element should not be aligned/padded.
  */
-export const writeVariableSizeElements = (output, elements, alignment, skipLastElementPadding = false) => {
+const writeVariableSizeElements = (output, elements, alignment, skipLastElementPadding = false) => {
 	elements.forEach((element, index) => {
 		output.write(element.serialize());
 		if (!skipLastElementPadding || elements.length - 1 !== index) {
@@ -179,4 +181,16 @@ export const writeVariableSizeElements = (output, elements, alignment, skipLastE
 				output.write(new Uint8Array(alignedSize - element.size));
 		}
 	});
+};
+
+export {
+	deepCompare,
+	alignUp,
+	size,
+	readArray,
+	readArrayCount,
+	readVariableSizeElements,
+	writeArray,
+	writeArrayCount,
+	writeVariableSizeElements
 };

@@ -92,7 +92,7 @@ export class MerkleHashBuilder {
  * @param {Hash256} rootHash Root hash of the merkle tree.
  * @returns {boolean} \c true if leaf hash is connected to root hash; false otherwise.
  */
-export const proveMerkle = (leafHash, merklePath, rootHash) => {
+const proveMerkle = (leafHash, merklePath, rootHash) => {
 	const computedRootHash = merklePath.reduce((workingHash, merklePart) => {
 		const hasher = sha3_256.create();
 		if (merklePart.isLeft) {
@@ -286,7 +286,7 @@ const deserializeBranch = reader => {
  * @param {Uint8Array} buffer Buffer containing serialized patricia tree nodes.
  * @returns {Array<TreeNode>} Deserialized patricia tree nodes.
  */
-export const deserializePatriciaTreeNodes = buffer => {
+const deserializePatriciaTreeNodes = buffer => {
 	const reader = new BufferReader(buffer.buffer);
 	const nodes = [];
 	while (!reader.eof) {
@@ -388,7 +388,7 @@ const findLinkIndex = (branchNode, targetLinkHash) => (
  * @param {Hash256} subcacheMerkleRoots Sub cache merkle roots corresponding to the state hash.
  * @returns {number} Proof result code.
  */
-export const provePatriciaMerkle = (encodedKey, valueToTest, merklePath, stateHash, subcacheMerkleRoots) => {
+const provePatriciaMerkle = (encodedKey, valueToTest, merklePath, stateHash, subcacheMerkleRoots) => {
 	if (!checkStateHash(stateHash, subcacheMerkleRoots))
 		return PatriciaMerkleProofResult.STATE_HASH_DOES_NOT_MATCH_ROOTS;
 
@@ -436,3 +436,9 @@ export const provePatriciaMerkle = (encodedKey, valueToTest, merklePath, stateHa
 };
 
 // endregion
+
+export {
+	proveMerkle,
+	deserializePatriciaTreeNodes,
+	provePatriciaMerkle
+};

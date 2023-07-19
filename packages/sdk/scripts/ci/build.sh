@@ -15,7 +15,8 @@ cd ..
 npm run bundle
 
 # build TS bindings
-npx tsc src/**/*.js --allowJS --declaration  --emitDeclarationOnly
-npx tsc test/**/*.js --allowJS --declaration  --emitDeclarationOnly
-npx tsc vectors/**/*.js --allowJS --declaration  --emitDeclarationOnly
+npx tsc -p ./tsconfig-generate.json
 npx tsc
+find src -name "*.ts" -type f -delete
+find test -name "*.ts" -type f -delete
+find vectors -name "*.ts" -type f -delete

@@ -153,7 +153,7 @@ export class Network {
 /**
  * Provides utility functions for finding a network.
  */
-export const NetworkLocator = {
+export class NetworkLocator {
 	/**
 	 * Finds a network with a specified name within a list of networks.
 	 * @template Address
@@ -162,14 +162,14 @@ export const NetworkLocator = {
 	 * @param {Array<string>|string} singleOrMultipleNames Names for which to search.
 	 * @returns {Network<Address, NetworkTimestamp>} First network with a name in the supplied list.
 	 */
-	findByName: (networks, singleOrMultipleNames) => {
+	static findByName(networks, singleOrMultipleNames) {
 		const names = Array.isArray(singleOrMultipleNames) ? singleOrMultipleNames : [singleOrMultipleNames];
 		const matchingNetwork = networks.find(network => names.some(name => name === network.name));
 		if (undefined === matchingNetwork)
 			throw RangeError(`no network found with name '${names.join(', ')}'`);
 
 		return matchingNetwork;
-	},
+	}
 
 	/**
 	 * Finds a network with a specified identifier within a list of networks.
@@ -179,7 +179,7 @@ export const NetworkLocator = {
 	 * @param {Array<number>|number} singleOrMultipleIdentifiers Identifiers for which to search.
 	 * @returns {Network<Address, NetworkTimestamp>} First network with an identifier in the supplied list.
 	 */
-	findByIdentifier: (networks, singleOrMultipleIdentifiers) => {
+	static findByIdentifier(networks, singleOrMultipleIdentifiers) {
 		const identifiers = Array.isArray(singleOrMultipleIdentifiers) ? singleOrMultipleIdentifiers : [singleOrMultipleIdentifiers];
 		const matchingNetwork = networks.find(network => identifiers.some(identifier => identifier === network.identifier));
 		if (undefined === matchingNetwork)
@@ -187,4 +187,4 @@ export const NetworkLocator = {
 
 		return matchingNetwork;
 	}
-};
+}

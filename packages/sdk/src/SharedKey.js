@@ -153,7 +153,7 @@ const isInMainSubgroup = point => {
  * @param {function} cryptoHash Hash function to use.
  * @returns {function(Uint8Array, PublicKey): Uint8Array} Creates a shared secret from a raw private key and public key.
  */
-export const deriveSharedSecretFactory = cryptoHash => (privateKeyBytes, otherPublicKey) => {
+const deriveSharedSecretFactory = cryptoHash => (privateKeyBytes, otherPublicKey) => {
 	const { scalarmult, Z } = tweetnacl.lowlevel;
 	const point = [gf(), gf(), gf(), gf()];
 
@@ -185,10 +185,15 @@ export const deriveSharedSecretFactory = cryptoHash => (privateKeyBytes, otherPu
  * @param {function} cryptoHash Hash function to use.
  * @returns {function(Uint8Array, PublicKey): SharedKey256} Creates a shared key from a raw private key and public key.
  */
-export const deriveSharedKeyFactory = (info, cryptoHash) => {
+const deriveSharedKeyFactory = (info, cryptoHash) => {
 	const deriveSharedSecret = deriveSharedSecretFactory(cryptoHash);
 	return (privateKeyBytes, otherPublicKey) => {
 		const sharedSecret = deriveSharedSecret(privateKeyBytes, otherPublicKey);
 		return new SharedKey256(hkdf(sha256, sharedSecret, undefined, info, 32));
 	};
+};
+
+export {
+	deriveSharedSecretFactory,
+	deriveSharedKeyFactory
 };

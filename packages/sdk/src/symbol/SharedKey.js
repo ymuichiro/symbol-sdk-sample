@@ -14,5 +14,6 @@ const deriveSharedKeyImpl = deriveSharedKeyFactory('catapult', crypto_hash);
  * @param {PublicKey} otherPublicKey Other party's public key.
  * @returns {SharedKey256} Shared encryption key.
  */
-export const deriveSharedKey = (keyPair, otherPublicKey) => // eslint-disable-line import/prefer-default-export
-	deriveSharedKeyImpl(keyPair.privateKey.bytes, otherPublicKey);
+const deriveSharedKey = (keyPair, otherPublicKey) => deriveSharedKeyImpl(keyPair.privateKey.bytes, otherPublicKey);
+
+export { deriveSharedKey }; // eslint-disable-line import/prefer-default-export
